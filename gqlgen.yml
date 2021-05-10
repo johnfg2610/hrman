@@ -56,4 +56,4 @@ models:
       - github.com/99designs/gqlgen/graphql.Int32
   ByteArray:
     model:
-      - github.com/johnfg10/hrman/bytearray.ByteArray
+      - github.com/johnfg10/hrman/graphql.ByteArray
