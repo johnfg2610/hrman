@@ -1,0 +1,77 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+scalar Time
+
+scalar ByteArray
+
+type EmployeeName {
+  firstName: String!
+  middleNames: String
+  surname: String!
+}
+
+type Employee {
+  id: ID!
+  name: EmployeeName!
+  dateOfBirth: Time!
+
+  startDate: Time!
+  endDate: Time
+
+  createdAt: Time!
+}
+
+enum EmployeeNoteType {
+  Note
+  InformalWarning
+  FormalWarning
+  Disciplinary
+  Notice
+}
+
+type File {
+  id: ID!
+  extReference: ID!
+}
+
+type EmployeeNote {
+  id: ID!
+  type: EmployeeNoteType!
+  note: String
+  files: [File]
+  createdAt: Time!
+}
+
+type Query {
+  employees: [Employee!]!
+  employeeById(id: ID): Employee
+  employeeByFirstName(name: String): Employee
+  employeeBySurname(name: String): Employee
+}
+
+input NewEmployee {
+  firstName: String!
+  middleNames: String
+  surname: String!
+  dateOfBirth: Time!
+  startDate: Time!
+}
+
+input NewEmployeeNote {
+  type: EmployeeNoteType
+  note: String
+}
+
+input NewFile {
+  payload: ByteArray
+}
+
+type Mutation {
+  createEmployee(input: NewEmployee!): Employee!
+
+  createEmployeeNote(input: NewEmployeeNote!): EmployeeNote
+  createFile(input: NewFile!): File
+  #createTodo(input: NewTodo!): Todo!
+}
